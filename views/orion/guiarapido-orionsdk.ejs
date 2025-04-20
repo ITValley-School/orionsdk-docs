@@ -1,0 +1,106 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="guiarapidoorionsdk" appConnect="local" -->
+
+
+
+<meta name="ac:route" content="/orion/guiarapido-orionsdk">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <h1 class="mb-3">
+        <i class="icon-base ti tabler-terminal me-2"></i> Guia Rápido
+    </h1>
+    <p class="lead">
+        Comece a usar o <strong>Orion SDK</strong> em menos de 2 minutos. Aqui está o caminho mais direto para instalar e executar seu primeiro fluxo com agentes de IA especializados.
+    </p>
+
+    <!-- Passo 1 - Instalação -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-download me-2"></i> 1. Instalação
+    </h2>
+    <p>Instale o SDK com o pip:</p>
+    <div class="card bg-light border border-primary mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>pip install itvalleyorion</code></pre>
+        </div>
+    </div>
+
+    <!-- Passo 2 - Exemplo Básico -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-file-code me-2"></i> 2. Exemplo básico
+    </h2>
+    <p>Veja abaixo como criar e orquestrar agentes com Operator, Analyst e Supervisor:</p>
+
+    <div class="card bg-light border mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>from itvalleyorion import Operator, Analyst, Supervisor, tool
+from pydantic import BaseModel, Field
+from typing import List, Dict
+
+# Definindo uma ferramenta com @tool
+@tool
+def buscar_dados(pais: str) -> Dict[str, float]:
+    return {"pib": 2.5, "inflação": 4.1}
+
+# Modelo de saída esperado
+class DadosEconomicos(BaseModel):
+    pib: float
+    inflação: float
+
+# Criando um analista
+analyst = Analyst(
+    name="Analista Econômico",
+    instructions="Analise os dados econômicos do país.",
+    tools=[buscar_dados],
+    output_type=DadosEconomicos
+)
+
+# Criando um operador simples
+operator = Operator(
+    name="Resumo Simples",
+    instructions="Escreva um resumo econômico simples."
+)
+
+# Criando o supervisor
+supervisor = Supervisor(
+    name="Coordenador Geral",
+    instructions="Decida entre resumo ou análise técnica conforme a necessidade do usuário.",
+    supervised_agents=[operator, analyst]
+)</code></pre>
+        </div>
+    </div>
+
+    <!-- Execução -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-bolt me-2"></i> 3. Rodando o supervisor
+    </h2>
+    <p>
+        O supervisor entende a intenção do usuário e delega para o agente mais adequado:
+    </p>
+    <div class="card bg-light border mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>
+import asyncio
+
+async def main():
+    resultado = await supervisor.run("Me dê uma análise técnica do Brasil")
+    print(resultado)
+
+asyncio.run(main())</code></pre>
+        </div>
+    </div>
+
+    <!-- Chamada para ação -->
+    <div class="text-center mt-5">
+        <p class="fs-5 fw-bold">Pronto! Você já tem seu primeiro fluxo com agentes inteligentes rodando.</p>
+        <a href="#componentes" class="btn btn-primary btn-lg mt-2">
+            Avançar para Componentes
+        </a>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="supervisoria" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<meta name="ac:route" content="/orion/supervisor-ia">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <div class="mb-5">
+        <h2 class="mb-3"><i class="ti ti-compass me-2"></i>Supervisor – O Orquestrador de Agentes</h2>
+        <p>
+            O <strong>Supervisor</strong> é o agente que <strong>coordena outros agentes</strong> (Operators ou Analysts). Ele analisa o input, entende a intenção do usuário e delega a tarefa para o agente mais adequado.
+        </p>
+        <p>
+            É perfeito para criar assistentes multi-inteligentes, onde você tem diferentes especialistas e precisa de uma IA que escolha o melhor para cada situação.
+        </p>
+
+        <h5 class="mt-4">Para usar um Supervisor:</h5>
+        <ol>
+            <li>Instale o SDK: <code>pip install itvalleyorion</code></li>
+            <li>Crie um ou mais agentes (Operator ou Analyst)</li>
+            <li>Crie o Supervisor com a lista de agentes supervisionados</li>
+            <li>Execute com <code>await supervisor.run()</code></li>
+        </ol>
+        <p class="mb-0">Abaixo, veja exemplos de como isso funciona na prática:</p>
+    </div>
+
+    <!-- Exemplo 1 – Delegação simples entre dois operadores -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-flowchart me-2"></i>Exemplo 1 – Delegação entre dois Operators</h5>
+            <pre><code class="language-python">
+from itvalleyorion import Operator, Supervisor, set_default_orion_key
+
+set_default_orion_key("sua-chave-api-orion")
+
+# Dois operadores com funções diferentes
+resumo = Operator(
+    name="Resumidor",
+    instructions="Resuma o texto em até 2 frases."
+)
+
+explicador = Operator(
+    name="Explicador",
+    instructions="Explique o conteúdo com mais detalhes, como se fosse para uma criança de 12 anos."
+)
+
+# Supervisor que escolhe quem responde
+supervisor = Supervisor(
+    name="Coordenador de Respostas",
+    instructions="""Decida se o usuário quer um resumo ou uma explicação detalhada.
+Se for resumo, use o agente Resumidor.
+Se for explicação, use o agente Explicador.""",
+    supervised_agents=[resumo, explicador]
+)
+
+resultado = await supervisor.run("Me explique o que é o ChatGPT")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-success mt-3" role="alert">
+                ChatGPT é um programa de computador que conversa com as pessoas como se fosse humano. Ele usa inteligência artificial para entender perguntas e responder com texto.
+            </div>
+        </div>
+    </div>
+
+    <!-- Exemplo 2 – Supervisor com Operator e Analyst -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-settings-cog me-2"></i>Exemplo 2 – Supervisor misto (Operator + Analyst)</h5>
+            <pre><code class="language-python">
+from itvalleyorion import Operator, Analyst, Supervisor, tool, set_default_orion_key
+from pydantic import BaseModel
+from typing import List
+
+set_default_orion_key("sua-chave-api-orion")
+
+# Operator simples
+resumidor = Operator(
+    name="Resumo Simples",
+    instructions="Resuma a mensagem em uma frase curta."
+)
+
+# Analyst com ferramenta e saída estruturada
+class AnaliseFinanceira(BaseModel):
+    tendencia: str
+    recomendacoes: List[str]
+
+@tool
+def buscar_dados_setor(setor: str) -> str:
+    return "Setor em queda. Concorrência em alta."
+
+analista = Analyst(
+    name="Analista Financeiro",
+    instructions="Analise o setor e forneça tendência e recomendações.",
+    tools=[buscar_dados_setor],
+    output_type=AnaliseFinanceira
+)
+
+# Supervisor inteligente
+supervisor = Supervisor(
+    name="Supervisor Estratégico",
+    instructions="""Se o usuário pedir apenas um resumo, use o agente Resumo Simples.
+Se ele pedir uma análise técnica ou mencionar finanças/setores, delegue ao Analista Financeiro.""",
+    supervised_agents=[resumidor, analista]
+)
+
+resultado = await supervisor.run("Preciso de uma análise técnica do setor bancário.")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-primary mt-3" role="alert">
+                tendencia: queda<br>
+                recomendacoes: ["Reduzir exposição ao setor", "Acompanhar dados da concorrência"]
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="analystia" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<meta name="ac:route" content="/orion/analyst-ia">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <div class="mb-5">
+        <h2 class="mb-3"><i class="ti ti-brain me-2"></i>Analyst – O Agente com Ferramentas Inteligentes (Opcionalmente)</h2>
+        <p>
+            O <strong>Analyst</strong> é o agente ideal quando você deseja ir além de um simples prompt. Ele pode executar funções Python decoradas com <code>@tool</code> e retornar respostas estruturadas usando <code>Pydantic</code>.
+        </p>
+        <p>
+            <strong>Importante:</strong> tanto o uso de <code>@tool</code> quanto de <code>output_type</code> são <strong>opcionais</strong>.
+        </p>
+        <ul>
+            <li>✅ Use <code>@tool</code> se quiser que o agente execute uma função sua (como acessar uma API, banco de dados, etc).</li>
+            <li>✅ Use <code>output_type</code> se quiser que a resposta venha formatada em campos bem definidos.</li>
+            <li>🟢 Mas se quiser apenas uma resposta textual, como um Operator com mais capacidade de raciocínio, o <code>Analyst</code> funciona normalmente sem essas partes.</li>
+        </ul>
+
+        <h5 class="mt-4">Para usar um Analyst:</h5>
+        <ol>
+            <li>Instale o SDK: <code>pip install itvalleyorion</code></li>
+            <li>Importe a classe <code>Analyst</code> e (opcionalmente) o <code>@tool</code></li>
+            <li>Crie o agente com ou sem ferramentas / estrutura de saída</li>
+            <li>Execute com <code>await analyst.run()</code></li>
+        </ol>
+    </div>
+
+    <!-- Exemplo 1 – Análise com campos e tools -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-database-cog me-2"></i>Exemplo 1 – Análise de Cliente (com tool + output)</h5>
+            <pre><code class="language-python">
+from itvalleyorion import Analyst, tool, set_default_orion_key
+from pydantic import BaseModel, Field
+from typing import List, Dict
+
+set_default_orion_key("sua-chave-api-orion")
+
+class AnaliseCliente(BaseModel):
+    segmento: str
+    risco: float
+    recomendacoes: List[str]
+
+@tool
+def buscar_compras(cliente_id: str) -> List[Dict]:
+    return [{"produto": "Notebook", "valor": 3200.0}]
+
+analista = Analyst(
+    name="Analista de Clientes",
+    instructions="Classifique o cliente com base nas compras.",
+    tools=[buscar_compras],
+    output_type=AnaliseCliente
+)
+
+resultado = await analista.run("Cliente 12345")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-primary mt-3" role="alert">
+                segmento: premium<br>
+                risco: 0.2<br>
+                recomendacoes: ["Oferecer upgrade de produto", "Aumentar limite"]
+            </div>
+        </div>
+    </div>
+
+    <!-- Exemplo 2 – Viagem com tool + output -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-map-pin me-2"></i>Exemplo 2 – Recomendador de Viagem (com tool + output)</h5>
+            <pre><code class="language-python">
+from itvalleyorion import Analyst, tool, set_default_orion_key
+from pydantic import BaseModel
+
+set_default_orion_key("sua-chave-api-orion")
+
+class SugestaoViagem(BaseModel):
+    destino: str
+    clima: str
+    tipo: str
+
+@tool
+def buscar_destino(continente: str) -> str:
+    return "Itália" if continente == "Europa" else "Tailândia"
+
+analista = Analyst(
+    name="Recomendador de Viagem",
+    instructions="Sugira um destino com clima e tipo de viagem baseado no continente.",
+    tools=[buscar_destino],
+    output_type=SugestaoViagem
+)
+
+resultado = await analista.run("Quero viajar para a Europa")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-info mt-3" role="alert">
+                destino: Itália<br>
+                clima: Ameno<br>
+                tipo: Cultural e gastronômico
+            </div>
+        </div>
+    </div>
+
+    <!-- Exemplo 3 – Sem tools, sem output_type -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-message me-2"></i>Exemplo 3 – Explicação simples (sem tool, sem estrutura)</h5>
+            <p class="card-text">O Analyst funcionando como um assistente textual inteligente.</p>
+
+            <pre><code class="language-python">
+from itvalleyorion import Analyst, set_default_orion_key
+
+set_default_orion_key("sua-chave-api-orion")
+
+explicador = Analyst(
+    name="Explicador de IA",
+    instructions="Explique de forma simples o que é aprendizado de máquina, como se fosse para um adolescente."
+)
+
+resultado = await explicador.run("O que é machine learning?")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-success mt-3" role="alert">
+                Machine learning é quando ensinamos um computador a aprender com exemplos, sem precisar programar tudo. É como ensinar um robô a reconhecer gatos mostrando várias fotos de gatos.
+            </div>
+        </div>
+    </div>
+</div>

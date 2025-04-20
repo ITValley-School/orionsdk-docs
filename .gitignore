@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+
+# dotenv
+.env
+.env.*
+
+# Wappler
+.wappler/
+.wapplerTemp/
+dmxConnect/modules/api_key.js
+dmxConnect/modules/config.js
+dmxConnect/config.php
+dmxConnect/lib/
+dmxConnect/permissions/
+
+# Build / Cache
+.cache/
+.vite/
+*.swp
+*.swo
+.tmp/
+.temp/
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Uploads temporários
+uploads/
+uploads_tmp/
+
+# Git temporários
+*.orig

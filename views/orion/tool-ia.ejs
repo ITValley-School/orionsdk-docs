@@ -1,0 +1,157 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="toolia" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<meta name="ac:route" content="/orion/tool-ia">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <div class="mb-5">
+        <h2 class="mb-3"><i class="ti ti-wrench me-2"></i>@tool – Suas funções Python virando superpoderes de IA</h2>
+
+        <p>
+            O decorador <code>@tool</code> transforma qualquer função Python simples em uma <strong>ferramenta acessível para o Analyst ou Supervisor</strong>.
+        </p>
+
+        <p>
+            Ele permite que o agente execute código real durante a geração de respostas — por exemplo, buscar dados, acessar uma API, consultar um banco ou fazer um cálculo.
+        </p>
+
+        <h5 class="mt-4">Quando usar o <code>@tool</code>?</h5>
+        <ul>
+            <li>✅ Quando você quiser que a IA execute uma ação real, além de gerar texto</li>
+            <li>✅ Quando o agente precisa consultar dados dinâmicos ou calcular algo</li>
+            <li>✅ Quando você quiser integrar lógica Python no fluxo da IA</li>
+        </ul>
+
+        <h5 class="mt-4">Como usar o <code>@tool</code>?</h5>
+        <ol>
+            <li>Importe <code>@tool</code> do SDK</li>
+            <li>Decore a função com <code>@tool</code></li>
+            <li>Use o Analyst ou Supervisor e passe as tools desejadas</li>
+        </ol>
+
+        <p class="mb-0">Abaixo, veja dois exemplos práticos:</p>
+    </div>
+
+    <!-- Exemplo 1 – Tool simples: cálculo -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-calculator me-2"></i>Exemplo 1 – Calculadora de porcentagem</h5>
+
+            <pre><code class="language-python">
+from itvalleyorion import Analyst, tool, set_default_orion_key
+
+set_default_orion_key("sua-chave-api-orion")
+
+@tool
+def calcular_desconto(preco: float, desconto: float) -> float:
+    """Calcula o valor com desconto aplicado"""
+    return preco - (preco * (desconto / 100))
+
+analista = Analyst(
+    name="Calculadora de Preço",
+    instructions="Calcule o valor com desconto aplicado, usando a função disponível.",
+    tools=[calcular_desconto]
+)
+
+resultado = await analista.run("Qual o valor de um produto de 120 reais com 20% de desconto?")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-success mt-3" role="alert">
+                O valor final é 96.0 reais.
+            </div>
+        </div>
+    </div>
+
+    <!-- Exemplo 2 – Tool com retorno complexo -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-cloud-search me-2"></i>Exemplo 2 – Busca de dados externos</h5>
+
+            <pre><code class="language-python">
+from itvalleyorion import Analyst, tool, set_default_orion_key
+
+set_default_orion_key("sua-chave-api-orion")
+
+@tool
+def buscar_dados_meteorologicos(cidade: str) -> str:
+    return f"A previsão para {cidade} é de 24°C com céu parcialmente nublado."
+
+analista = Analyst(
+    name="Consultor de Clima",
+    instructions="Forneça a previsão do tempo para a cidade informada, usando a ferramenta.",
+    tools=[buscar_dados_meteorologicos]
+)
+
+resultado = await analista.run("Qual a previsão do tempo para Recife?")
+print(resultado)
+      </code></pre>
+
+            <div class="alert alert-info mt-3" role="alert">
+                A previsão para Recife é de 24°C com céu parcialmente nublado.
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <h2 class="mb-3"><i class="ti ti-hexagon me-2"></i>Resumo Visual – Quem faz o quê?</h2>
+        <p class="lead">
+            Compare os agentes do Orion SDK e entenda quando usar cada um.
+            Essa tabela resume <strong>capacidades, objetivos e interações possíveis</strong>.
+        </p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Agente</th>
+                    <th>Descrição</th>
+                    <th>Executa <br> Prompt Simples</th>
+                    <th>Usa Funções <code>@tool</code></th>
+                    <th>Retorna Dados Estruturados</th>
+                    <th>Decide Qual Agente Usar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Operator</strong></td>
+                    <td>Executa uma tarefa textual simples baseada em prompt.</td>
+                    <td>✅</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><strong>Analyst</strong></td>
+                    <td>Executa ferramentas Python e pode retornar dados estruturados.</td>
+                    <td>✅</td>
+                    <td>✅ <br><small>(opcional)</small></td>
+                    <td>✅ <br><small>(opcional)</small></td>
+                    <td>❌</td>
+                </tr>
+                <tr>
+                    <td><strong>Supervisor</strong></td>
+                    <td>Coordena e delega tarefas entre operadores e analistas.</td>
+                    <td>✅</td>
+                    <td>✅ <br><small>(opcional)</small></td>
+                    <td>✅ <br><small>(opcional)</small></td>
+                    <td>✅</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="alert alert-info mt-4" role="alert">
+        <i class="ti ti-bulb me-2"></i>
+        Use o <strong>@tool</strong> quando quiser acionar código Python real (como APIs, consultas ou cálculos) dentro do fluxo de IA.
+    </div>
+
+</div>

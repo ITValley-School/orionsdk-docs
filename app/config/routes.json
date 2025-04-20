@@ -1,0 +1,55 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "page": "index",
+      "routeType": "page",
+      "layout": "main"
+    },
+    {
+      "path": "/Orion-sdk",
+      "page": "Orion-sdk",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/introducao-orion",
+      "page": "orion/introducao-orion",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/guiarapido-orionsdk",
+      "page": "orion/guiarapido-orionsdk",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/os3agentesdeia",
+      "page": "orion/os3agentesdeia",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/operador-ia",
+      "page": "orion/operador-ia",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/analyst-ia",
+      "page": "orion/analyst-ia",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/supervisor-ia",
+      "page": "orion/supervisor-ia",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/tool-ia",
+      "page": "orion/tool-ia",
+      "layout": "main"
+    },
+    {
+      "path": "/orion/inicio-sdkorion",
+      "page": "orion/inicio-sdkorion",
+      "layout": "main"
+    }
+  ]
+}

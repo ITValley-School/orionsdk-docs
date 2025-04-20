@@ -1,0 +1,92 @@
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="operadoria" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+<meta name="ac:route" content="/orion/operador-ia">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+<div class="container py-5">
+    <div class="mb-5">
+        <h2 class="mb-3"><i class="ti ti-flash me-2"></i>Operator – Seu primeiro agente de IA</h2>
+        <p>
+            O <strong>Operator</strong> é o agente mais direto do Orion SDK. Ele executa uma tarefa textual com base em uma instrução e retorna uma resposta simples, sem lógica adicional ou ferramentas externas.
+        </p>
+        <p>
+            Ideal para tarefas como: <em>classificação de texto, geração de frases, resumos curtos ou reescrita de conteúdo</em>.
+        </p>
+
+        <h5 class="mt-4">Para usar um Operator:</h5>
+        <ol>
+            <li>Instale o SDK: <code>pip install itvalleyorion</code></li>
+            <li>Importe a classe <code>Operator</code></li>
+            <li>Importe e configure sua API Key com <code>set_default_orion_key()</code> (você recebe ao se cadastrar)</li>
+        </ol>
+
+        <p class="mb-0">Agora veja exemplos prontos para usar 👇</p>
+    </div>
+
+    <!-- Card: Exemplo Funcional -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-robot me-2"></i>Exemplo 1 – Classificador de Sentimentos</h5>
+            <p class="card-text">
+                Um Operator simples que recebe um texto e retorna se é <strong>positivo</strong>, <strong>negativo</strong> ou <strong>neutro</strong>.
+            </p>
+
+            <pre><code class="language-python">
+from itvalleyorion import Operator, set_default_orion_key
+
+# (1) Configure a chave de API
+set_default_orion_key("sua-chave-api-orion")
+
+# (2) Crie o operador
+classificador = Operator(
+    name="Classificador de Texto",
+    instructions="Classifique o texto como positivo, negativo ou neutro."
+)
+
+# (3) Execute o agente
+resultado = await classificador.run("Esse curso é incrível, gostei muito.")
+print(resultado)
+      </code></pre>
+
+            <p class="mt-3"><strong>🧾 Resposta esperada:</strong></p>
+            <div class="alert alert-success mb-0" role="alert">
+                Positivo
+            </div>
+        </div>
+    </div>
+
+    <!-- Card: Exemplo Engraçado -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title"><i class="ti ti-mood-happy me-2"></i>Exemplo 2 – Comediante de IA</h5>
+            <p class="card-text">
+                Um Operator divertido que responde com uma <strong>piada curta sobre programação</strong>.
+            </p>
+
+            <pre><code class="language-python">
+from itvalleyorion import Operator, set_default_orion_key
+
+set_default_orion_key("sua-chave-api-orion")
+
+piadista = Operator(
+    name="Comediante de IA",
+    instructions="Responda com uma piada curta e inteligente sobre programação. Apenas uma frase, nada de explicação."
+)
+
+resultado = await piadista.run("Manda uma piada aí")
+print(resultado)
+      </code></pre>
+
+            <p class="mt-3"><strong>🧾 Resposta possível:</strong></p>
+            <div class="alert alert-info mb-0" role="alert">
+                Por que o Python foi ao médico? Porque estava se sentindo muito 'indentado'.
+            </div>
+        </div>
+    </div>
+</div>
