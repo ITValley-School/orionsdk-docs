@@ -1,0 +1,108 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="jesusgraphmaestroexemplo" appConnect="local" -->
+<meta name="ac:route" content="/jesusgraph/jesusgraph-maestro-exemplo">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+
+<div class="container py-5">
+    <h1 class="mb-4">
+        <i class="ti ti-pizza me-2"></i> Vamos Orquestrar um Pedido de Pizza com JesusGraph
+    </h1>
+
+    <p class="lead">
+        Imagine que você está construindo um sistema com <strong>agentes de IA</strong> que colaboram para processar um pedido de pizza.
+        Cada agente faz uma parte: recebe o pedido, calcula o valor, prepara e entrega.
+    </p>
+
+    <p>
+        E tudo isso passa por uma “bênção”, chamada <strong>Blessing</strong>, que carrega os dados de uma etapa para a outra.
+        Você vai criar uma sequência que conecta essas funções como uma corrente — clara, lógica e... saborosa 🍕.
+    </p>
+
+    <h2 class="mt-5">🎯 Nosso framework de orquestração segue estes passos:</h2>
+    <ol>
+        <li><strong>Criar</strong> o grafo com o orquestrador (<code>JesusGraphCore</code>)</li>
+        <li><strong>Adicionar</strong> os nós (funções que executam ações)</li>
+        <li><strong>Definir</strong> o ponto de entrada e saída</li>
+        <li><strong>Conectar</strong> os nós com arestas</li>
+        <li><strong>Executar</strong> o fluxo passando uma Blessing com dados iniciais</li>
+        <li><strong>Observar</strong> o estado final (a Blessing recheada de informações!)</li>
+    </ol>
+
+    <h2 class="mt-5">💡 Código Completo com Comentários</h2>
+    <div class="card bg-light border">
+        <div class="card-body">
+            <pre><code>from jesusgraph.core.graph import JesusGraphCore
+from jesusgraph.core.blessingstate import BlessingState
+
+# 1. Criamos funções que representam agentes
+def receber_pedido(blessing: BlessingState) -> BlessingState:
+    print("🛎e️ Recebendo pedido")
+    blessing.addBlessing("pedido_id", "PED-001")
+    blessing.addBlessing("cliente", "Carlos")
+    blessing.addBlessing("itens", ["Pizza Calabresa", "Suco"])
+    return blessing
+
+def calcular_valor(blessing: BlessingState) -> BlessingState:
+    print("💰 Calculando valor")
+    precos = {"Pizza Calabresa": 40, "Suco": 10}
+    total = sum(precos.get(item, 0) for item in blessing["itens"])
+    blessing.addBlessing("total", total)
+    return blessing
+
+def entregar_pedido(blessing: BlessingState) -> BlessingState:
+    print("🚚 Entregando para", blessing["cliente"])
+    blessing.addLastBlessing({"status": "ENTREGUE", "valor": blessing["total"]})
+    return blessing
+
+# 2. Criamos o grafo
+grafo = JesusGraphCore()
+
+# 3. Adicionamos os nós
+grafo.add_node("receber", receber_pedido)
+grafo.add_node("calcular", calcular_valor)
+grafo.add_node("entregar", entregar_pedido)
+
+# 4. Definimos entrada e saída
+grafo.set_entry_node("receber")
+grafo.set_end_node("entregar")
+
+# 5. Conectamos as funções
+grafo.connecte("receber", "calcular")
+grafo.connecte("calcular", "entregar")
+
+# 6. Executamos com dados iniciais
+resultado = grafo.run()
+
+# 7. Mostramos a Blessing final
+print("\n📟 Resultado Final:")
+print(resultado.last)</code></pre>
+        </div>
+    </div>
+
+    <h2 class="mt-5">📟 Saída Esperada:</h2>
+    <div class="card bg-light border">
+        <div class="card-body">
+            <pre><code>🛎e️ Recebendo pedido
+💰 Calculando valor
+🚚 Entregando para Carlos
+
+📟 Resultado Final:
+{'status': 'ENTREGUE', 'valor': 50}</code></pre>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <p class="fs-5 fw-bold">🌟 Parabéns! Você acabou de orquestrar seu primeiro fluxo com JesusGraph.</p>
+        <a href="#" class="btn btn-primary btn-lg mt-2">
+            Avançar para Componentes
+        </a>
+    </div>
+</div>

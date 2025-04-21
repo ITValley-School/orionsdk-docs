@@ -50,6 +50,41 @@
       "path": "/orion/inicio-sdkorion",
       "page": "orion/inicio-sdkorion",
       "layout": "main"
+    },
+    {
+      "path": "/jesusgraph/Inicio-jesusgraph",
+      "page": "jesusgraph/Inicio-jesusgraph",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/quickstart-jesusgraph",
+      "page": "jesusgraph/quickstart-jesusgraph",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/blessing-jesusgraph",
+      "page": "jesusgraph/blessing-jesusgraph",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/blessing-metodos",
+      "page": "jesusgraph/blessing-metodos",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/blessing-exemplos",
+      "page": "jesusgraph/blessing-exemplos",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/jesusgraph-maestro",
+      "page": "jesusgraph/jesusgraph-maestro",
+      "layout": "main-jesusgraph"
+    },
+    {
+      "path": "/jesusgraph/jesusgraph-maestro-exemplo",
+      "page": "jesusgraph/jesusgraph-maestro-exemplo",
+      "layout": "main-jesusgraph"
     }
   ]
 }

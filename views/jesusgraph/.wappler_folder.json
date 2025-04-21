@@ -1,0 +1,30 @@
+{
+  "Inicio-jesusgraph.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "quickstart-jesusgraph.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "blessing-jesusgraph.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "blessing-metodos.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "blessing-exemplos.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "jesusgraph-maestro.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  },
+  "jesusgraph-maestro-exemplo.ejs": {
+    "layoutPage": "main-jesusgraph",
+    "description": ""
+  }
+}

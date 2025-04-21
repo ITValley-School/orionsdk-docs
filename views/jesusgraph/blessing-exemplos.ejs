@@ -1,0 +1,106 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="blessingexemplos" appConnect="local" -->
+<meta name="ac:route" content="/jesusgraph/blessing-exemplos">
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="blessings-exemplos" appConnect="local" -->
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <h1 class="mb-4">
+        <i class="ti ti-gift"></i> Exemplos de Uso da <code>Blessing</code>
+    </h1>
+    <p class="lead">Veja na prática como usar a Blessing para guardar, atualizar e acessar informações ao longo do seu fluxo no JesusGraph.</p>
+
+    <!-- Exemplo 1 -->
+    <h2 class="mt-5">📦 Exemplo 1: Adicionando e Acessando uma Blessing</h2>
+    <p>
+        Você está escrevendo sua primeira função. Quer salvar um dado que será usado depois.
+        A <strong>Blessing</strong> entra em cena como uma <em>caixa mágica onde você deposita informações</em> — e qualquer outra função poderá pegar depois.
+    </p>
+    <div class="card bg-light border mb-3">
+        <div class="card-body">
+            <pre><code class="language-python">from jesusgraph import BlessingState
+
+def salvar_nome(blessing: BlessingState) -> BlessingState:
+    blessing.addBlessing("usuario", "Carlos")
+    return blessing
+
+def dar_boas_vindas(blessing: BlessingState) -> BlessingState:
+    nome = blessing.getBlessing("usuario")
+    print(f"Bem-vindo, {nome}!")
+    return blessing
+
+blessing = BlessingState()
+blessing = salvar_nome(blessing)
+blessing = dar_boas_vindas(blessing)
+print(blessing)</code></pre>
+        </div>
+    </div>
+    <p><strong>📝 Saída da execução:</strong></p>
+    <pre><code class="language-python">Bem-vindo, Carlos!
+Blessings: {'usuario': 'Carlos'}</code></pre>
+
+    <!-- Exemplo 2 -->
+    <h2 class="mt-5">🔁 Exemplo 2: Atualizando informações no meio do caminho</h2>
+    <p>
+        Você começa com uma intenção. Depois, decide alterar algo no meio do processo.
+        A <strong>Blessing</strong> deixa isso muito fácil — <em>sem complexidade, sem estresse</em>.
+    </p>
+    <div class="card bg-light border mb-3">
+        <div class="card-body">
+            <pre><code class="language-python">def definir_idade(blessing: BlessingState) -> BlessingState:
+    blessing.addBlessing("idade", 35)
+    return blessing
+
+def fazer_aniversario(blessing: BlessingState) -> BlessingState:
+    idade_atual = blessing.getBlessing("idade")
+    blessing.updateBlessing("idade", idade_atual + 1)
+    return blessing
+
+blessing = BlessingState()
+blessing = definir_idade(blessing)
+blessing = fazer_aniversario(blessing)
+print(blessing)</code></pre>
+        </div>
+    </div>
+    <p><strong>📝 Saída da execução:</strong></p>
+    <pre><code class="language-python">Blessings: {'idade': 36}</code></pre>
+
+    <!-- Exemplo 3 -->
+    <h2 class="mt-5">🧠 Exemplo 3: Guardando o último resultado</h2>
+    <p>
+        Quando o fluxo termina, você quer guardar o resultado final num lugar especial.
+        A <code>lastBlessing</code> é como um <strong>selo final</strong> de tudo que foi feito.
+    </p>
+    <div class="card bg-light border mb-3">
+        <div class="card-body">
+            <pre><code class="language-python">def somar(blessing: BlessingState) -> BlessingState:
+    resultado = 10 + 5
+    blessing.addLastBlessing({"resultado": resultado})
+    return blessing
+
+blessing = BlessingState()
+blessing = somar(blessing)
+print(blessing.last)</code></pre>
+        </div>
+    </div>
+    <p><strong>📝 Saída da execução:</strong></p>
+    <pre><code class="language-python">{'resultado': 15}</code></pre>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-5">
+        <p class="fs-5 fw-bold">🌟 Agora é com você!</p>
+        <p class="mb-3">A <strong>Blessing</strong> é mais do que uma estrutura de dados — ela é a memória viva do seu fluxo.</p>
+        <a href="/jesusgraph/componentes" class="btn btn-primary btn-lg">Avançar para Componentes</a>
+    </div>
+</div>
+
+<script>
+    hljs.highlightAll();
+</script>

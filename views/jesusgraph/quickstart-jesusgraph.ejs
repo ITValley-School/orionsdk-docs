@@ -1,0 +1,95 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="quickstartjesusgraph" appConnect="local" -->
+
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="guiarapidojesusgraph" appConnect="local" -->
+
+<meta name="ac:route" content="/jesusgraph/quickstart-jesusgraph">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <h1 class="mb-3">
+        <i class="icon-base ti tabler-terminal me-2"></i> Guia Rápido - JesusGraph
+    </h1>
+    <p class="lead">
+        Comece a usar o <strong>JesusGraph</strong> em menos de 2 minutos. Este guia mostra como instalar e executar um fluxo orquestrado com funções que compartilham estado — ou melhor, <em>Blessings</em>.
+    </p>
+
+    <!-- Passo 1 - Instalação -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-download me-2"></i> 1. Instalação
+    </h2>
+    <p>Instale o pacote do JesusGraph com pip:</p>
+    <div class="card bg-light border border-primary mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>pip install jesusgraph</code></pre>
+        </div>
+    </div>
+
+    <!-- Passo 2 - Fluxo Básico -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-share me-2"></i> 2. Criando um fluxo básico
+    </h2>
+    <p>Veja como criar um fluxo completo com quatro etapas: receber, calcular, preparar e entregar.</p>
+
+    <div class="card bg-light border mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>from jesusgraph.core.graph import JesusGraphCore
+from jesusgraph.core.blessingstate import BlessingState
+import time
+
+def exemplo(blessing: BlessingState) -> BlessingState:
+    blessing.addBlessing("mensagem", "Shalom!")
+    return blessing
+
+graph = JesusGraphCore()
+graph.add_node("inicio", exemplo)
+graph.set_entry_node("inicio")
+graph.set_end_node("inicio")
+resultado = graph.run()
+print(resultado.get("mensagem"))  # Shalom!</code></pre>
+        </div>
+    </div>
+
+    <!-- Execução Avançada -->
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-bolt me-2"></i> 3. Fluxo com múltiplas etapas
+    </h2>
+    <p>Você pode orquestrar múltiplos nós e conectar funções complexas, mantendo um estado compartilhado.</p>
+    <div class="card bg-light border mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>grafo = JesusGraphCore()
+
+grafo.add_node("receber", receber_pedido)
+grafo.add_node("calcular", calcular_valor)
+grafo.add_node("preparar", preparar_pedido)
+grafo.add_node("entregar", entregar_pedido)
+
+grafo.set_entry_node("receber")
+grafo.connecte("receber", "calcular")
+grafo.connecte("calcular", "preparar")
+grafo.connecte("preparar", "entregar")
+grafo.set_end_node("entregar")
+
+resultado = grafo.run({
+    "cliente_nome": "Maria",
+    "itens": ["Pizza Margherita", "Refrigerante"]
+})
+
+print(resultado.get("valor_total"))</code></pre>
+        </div>
+    </div>
+
+    <!-- Chamada para ação -->
+    <div class="text-center mt-5">
+        <p class="fs-5 fw-bold">Pronto! Você criou seu primeiro fluxo com o JesusGraph.</p>
+        <a href="#componentes" class="btn btn-success btn-lg mt-2">
+            Avançar para Componentes
+        </a>
+    </div>
+</div>

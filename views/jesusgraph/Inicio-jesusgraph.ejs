@@ -1,0 +1,132 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="Iniciojesusgraph" appConnect="local" -->
+<meta name="ac:route" content="/jesusgraph/Inicio-jesusgraph">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-4">
+    <div class="mb-5 text-center">
+        <h1 class="fw-bold display-5">JesusGraph: Um Orquestrador Inspirado por Propósito</h1>
+        <p class="text-muted fs-5">Um framework open source que transforma dados em bênçãos.</p>
+    </div>
+
+    <div class="mb-4">
+        <p>
+            <center><img src="/assets/img/branding/ChatGPT%20Image%2019%20avr.%202025,%2022%20h%2006%20min%2010%20s.png" width="400" height="400" alt="JesusGraph"></center>
+        </p>
+        <p>JesusGraph é um orquestrador de execução baseado em grafos, projetado para ser simples, expansível e com código-fonte aberto. Seu diferencial está na sua alma: o estado compartilhado entre as funções é chamado de <strong>Blessing</strong>, simbolizando que cada etapa do fluxo recebe e entrega uma "benção" para o próximo nó.</p>
+        <p>Inspirado na teoria dos grafos, o JesusGraph conecta funções (<em>nós</em>) por meio de caminhos definidos (<em>arestas</em>), onde cada função executa uma tarefa e passa um estado enriquecido para frente.</p>
+        <p>É ideal para orquestrar:</p>
+        <ul>
+            <li>Agentes de IA</li>
+            <li>Fluxos de processamento de dados</li>
+            <li>Pipelines de negócios</li>
+            <li>Processos humanos interativos</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🌊 Por que usar o JesusGraph?</h3>
+        <ul>
+            <li><strong>✨ Simplicidade:</strong> Estrutura clara baseada em nós e estados</li>
+            <li><strong>✨ Humanidade:</strong> O estado é chamado de "Blessing", pois cada função é abençoada por dados vindos da anterior</li>
+            <li><strong>✨ Extensível:</strong> Adicione nós, funções, entradas humanas, lógica de pausa e muito mais</li>
+            <li><strong>✨ Observável:</strong> Cada passo deixa um histórico e pode ser auditado</li>
+            <li><strong>✨ Sem dependências externas:</strong> Apenas Python puro</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🚀 Exemplo de uso</h3>
+        <pre><code class="language-python">
+from jesusgraph.core.graph import JesusGraphCore
+from jesusgraph.core.blessingstate import BlessingState
+
+def exemplo(blessing: BlessingState) -> BlessingState:
+    blessing.addBlessing("mensagem", "Shalom!")
+    return blessing
+
+graph = JesusGraphCore()
+graph.add_node("inicio", exemplo)
+graph.set_entry_node("inicio")
+graph.set_end_node("inicio")
+resultado = graph.run()
+print(resultado.get("mensagem"))  # Shalom!
+    </code></pre>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🔍 Conceitos Fundamentais</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Conceito</th>
+                    <th>Descrição</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BlessingState</td>
+                    <td>Objeto de estado compartilhado entre os nós</td>
+                </tr>
+                <tr>
+                    <td>JesusGraphCore</td>
+                    <td>Classe principal do orquestrador de grafos</td>
+                </tr>
+                <tr>
+                    <td>add_node</td>
+                    <td>Registra uma função como nó</td>
+                </tr>
+                <tr>
+                    <td>add_edge</td>
+                    <td>Conecta nós sequencialmente</td>
+                </tr>
+                <tr>
+                    <td>set_entry_node / set_end_node</td>
+                    <td>Define onde o fluxo inicia e termina</td>
+                </tr>
+                <tr>
+                    <td>run</td>
+                    <td>Executa o grafo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🚧 Componentes do JesusGraph</h3>
+        <ul>
+            <li><strong>BlessingState:</strong> Contêiner do estado com métodos <code>addBlessing</code>, <code>getBlessing</code>, <code>updateBlessing</code> e <code>mergeBlessings</code></li>
+            <li><strong>JesusGraphCore:</strong> Responsável por conectar e orquestrar os nós do grafo</li>
+            <li><strong>ExecutionState:</strong> (Interno) Armazena metadados como histórico de nós, pausas, erros e timestamps</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🚜 Quando usar</h3>
+        <ul>
+            <li>Criação de assistentes baseados em múltiplas etapas</li>
+            <li>Workflows de aprovação com pausas humanas</li>
+            <li>Integração entre serviços com lógicas diferentes</li>
+            <li>Automação de processos de atendimento e decisão</li>
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="fw-semibold">🌈 Filosofia</h3>
+        <p>JesusGraph não é apenas um framework técnico.</p>
+        <p>Ele é um lembrete de que cada pedaço de informação pode ser uma bênção se tratado com intencionalidade. Cada função recebe algo, melhora esse algo e entrega com mais valor ao próximo.</p>
+    </div>
+
+    <div class="text-center mt-5">
+        <h4 class="fw-semibold">🌟 Próximo passo</h4>
+        <p class="fs-5">Vamos para o <strong>Guia Rápido</strong> e começar a usar o JesusGraph na prática.</p>
+        <p class="text-muted">✅ Open Source - <a href="https://github.com/itvalley/jesusgraph" target="_blank">github.com/itvalley/jesusgraph</a></p>
+    </div>
+</div>

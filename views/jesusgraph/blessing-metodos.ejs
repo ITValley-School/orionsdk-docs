@@ -1,0 +1,109 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="blessingmetodos" appConnect="local" -->
+<meta name="ac:route" content="/jesusgraph/blessing-metodos">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<div class="container py-5">
+    <h1 class="mb-4">
+        <i class="ti ti-aperture me-2"></i> Métodos da <strong>BlessingState</strong>
+    </h1>
+    <p class="lead">
+        Simples, direta e elegante. A <strong>BlessingState</strong> é onde toda a mágica acontece no JesusGraph.
+        Abaixo estão os métodos que você pode usar para adicionar, recuperar, atualizar e navegar pelas bênçãos que fluem pelo seu grafo.
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Método</th>
+                    <th>Descrição</th>
+                    <th>Exemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>addBlessing(nome, valor)</code></td>
+                    <td>Adiciona uma nova informação à Blessing.</td>
+                    <td><code>blessing.addBlessing("usuario", "Carlos")</code></td>
+                </tr>
+                <tr>
+                    <td><code>getBlessing(nome)</code></td>
+                    <td>Recupera uma informação armazenada.</td>
+                    <td><code>blessing.getBlessing("usuario")</code></td>
+                </tr>
+                <tr>
+                    <td><code>updateBlessing(nome, novo_valor)</code></td>
+                    <td>Atualiza uma informação existente.</td>
+                    <td><code>blessing.updateBlessing("usuario", "Larissa")</code></td>
+                </tr>
+                <tr>
+                    <td><code>hasBlessing(nome)</code></td>
+                    <td>Verifica se uma informação existe.</td>
+                    <td><code>blessing.hasBlessing("usuario")</code></td>
+                </tr>
+                <tr>
+                    <td><code>allBlessings()</code></td>
+                    <td>Retorna todas as bênçãos atuais.</td>
+                    <td><code>blessing.allBlessings()</code></td>
+                </tr>
+                <tr>
+                    <td><code>addLastBlessing(valor)</code></td>
+                    <td>Define a “última bênção” do fluxo.</td>
+                    <td><code>blessing.addLastBlessing({"resumo": "Fluxo completo."})</code></td>
+                </tr>
+                <tr>
+                    <td><code>getLastBlessing()</code></td>
+                    <td>Recupera a última bênção definida.</td>
+                    <td><code>blessing.getLastBlessing()</code></td>
+                </tr>
+                <tr>
+                    <td><code>updateLastBlessing(valor)</code></td>
+                    <td>Atualiza a última bênção.</td>
+                    <td><code>blessing.updateLastBlessing("Resultado final")</code></td>
+                </tr>
+                <tr>
+                    <td><code>state["chave"] = valor</code></td>
+                    <td>Acesso estilo dicionário para adicionar.</td>
+                    <td><code>blessing["email"] = "exemplo@email.com"</code></td>
+                </tr>
+                <tr>
+                    <td><code>state["chave"]</code></td>
+                    <td>Acesso estilo dicionário para ler.</td>
+                    <td><code>blessing["email"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>"chave" in state</code></td>
+                    <td>Verifica se uma chave existe.</td>
+                    <td><code>"usuario" in blessing</code></td>
+                </tr>
+                <tr>
+                    <td><code>len(state)</code></td>
+                    <td>Conta o número de bênçãos.</td>
+                    <td><code>len(blessing)</code></td>
+                </tr>
+                <tr>
+                    <td><code>for k, v in state.items()</code></td>
+                    <td>Itera pelas bênçãos.</td>
+                    <td><code>for k, v in blessing.items(): print(k, v)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-5">
+        <p class="fs-5 fw-bold">
+            Com essas ferramentas em mãos, você pode criar fluxos incrivelmente ricos — e cheios de significado. Vamos para os exemplos?
+        </p>
+        <a href="#exemplos-blessing" class="btn btn-primary btn-lg mt-2">
+            Ver Exemplos na Prática
+        </a>
+    </div>
+</div>

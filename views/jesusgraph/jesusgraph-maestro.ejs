@@ -1,0 +1,59 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="jesusgraphmaestro" appConnect="local" -->
+<meta name="ac:route" content="/jesusgraph/jesusgraph-maestro">
+
+<head>
+    <!-- Highlight.js para código colorido -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+
+<!-- Wappler include head-page="layouts/main" is="dmx-app" id="jesusgraph-core" appConnect="local" -->
+<div class="container py-5">
+    <h1 class="mb-4"><i class="ti ti-circuit-diagram me-2"></i> A Orquestra do JesusGraph</h1>
+    <p class="lead">
+        Depois da <strong>Blessing</strong>, chega a hora de reger o espetáculo. No JesusGraph, os componentes que guiam a jornada são os orquestradores: simples, poderosos e organizados.
+    </p>
+
+    <div class="mb-5">
+        <h2><i class="ti ti-router me-2"></i> JesusGraphCore</h2>
+        <p>
+            O <code>JesusGraphCore</code> é o maestro da sua orquestra. Ele não executa nada sozinho — mas sabe quem deve tocar, em que ordem, e garante que cada nota seja passada com perfeição.
+        </p>
+    </div>
+
+    <div class="mb-5">
+        <h2><i class="ti ti-box-multiple me-2"></i> Nós (Nodes)</h2>
+        <p>
+            Cada <strong>nó</strong> representa uma função. Você adiciona um nó usando <code>add_node(nome, funcao)</code>. Ele aceita qualquer função que use e retorne uma <code>BlessingState</code>.
+        </p>
+        <pre><code>graph.add_node("receber_pedido", receber_pedido)</code></pre>
+    </div>
+
+    <div class="mb-5">
+        <h2><i class="ti ti-git-branch me-2"></i> Arestas (Edges)</h2>
+        <p>
+            Os <strong>caminhos</strong> entre os nós são criados com <code>add_edge("A", "B")</code> ou <code>connecte("A", "B")</code>. Assim, você diz ao orquestrador quem vem depois.
+        </p>
+        <pre><code>graph.add_edge("calcular_valor", "preparar_pedido")</code></pre>
+    </div>
+
+    <div class="mb-5">
+        <h2><i class="ti ti-rocket me-2"></i> Executando o Grafo</h2>
+        <p>
+            Com o início e fim definidos (<code>set_entry_node</code> e <code>set_end_node</code>), você pode executar com <code>graph.run(dados)</code>.
+        </p>
+        <pre><code>
+graph.set_entry_node("receber_pedido")
+graph.set_end_node("entregar_pedido")
+resultado = graph.run({"cliente_nome": "Maria", "itens": ["Pizza"]})
+    </code></pre>
+    </div>
+
+    <div class="text-center mt-5">
+        <p class="fs-5 fw-bold">E pronto — você criou um fluxo visível, auditável e abençoado.</p>
+        <a href="#guiarapido" class="btn btn-success btn-lg mt-2">🎯 Ver o Guia Rápido</a>
+    </div>
+</div>

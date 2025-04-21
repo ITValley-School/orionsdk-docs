@@ -1,0 +1,99 @@
+<!-- Wappler include head-page="layouts/main-jesusgraph" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="blessingjesusgraph" appConnect="local" components="{dmxBootstrap5Alert:{}}" -->
+
+<!-- Wappler include head-page="layouts/main" fontawesome_5="cdn" bootstrap5="local" is="dmx-app" id="blessingstateintro" appConnect="local" -->
+
+<meta name="ac:route" content="/jesusgraph/blessing-jesusgraph">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+</head>
+<div class="container py-5">
+    <h1 class="mb-3">
+        <i class="icon-base ti tabler-heartbeat me-2"></i> Entendendo a Blessing
+    </h1>
+
+    <p class="lead">
+        Às vezes, uma ideia simples muda tudo.
+        O <strong>JesusGraph</strong> não apenas executa funções em sequência — ele cria um caminho onde os dados ganham significado.
+        E no centro disso está a <strong>Blessing</strong>: uma sacada que parece simples, mas transforma a forma como lidamos com informações em fluxos inteligentes.
+    </p>
+
+    <hr class="my-4">
+
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-box-margin me-2"></i> O que é uma Blessing?
+    </h2>
+    <p>
+        A <strong>Blessing</strong> é uma estrutura de dados poderosa que funciona como uma <em>caixa de informações compartilhada</em>.
+        Ela viaja por todas as funções do seu fluxo, carregando os dados gerados em cada etapa e tornando-os acessíveis a qualquer parte do processo.
+    </p>
+    <p>
+        Em vez de passar variáveis, você apenas <strong>enriquece a Blessing</strong>. Cada nó do grafo tem acesso a essa blessing, podendo adicionar, ler ou modificar essas informações.
+    </p>
+
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-puzzle me-2"></i> Como funciona na prática?
+    </h2>
+
+    <p>
+        Veja este exemplo básico:
+    </p>
+
+    <div class="card bg-light border mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>from jesusgraph import BlessingState
+
+def iniciar_fluxo(blessing: BlessingState) -> BlessingState:
+    blessing.addBlessing("usuario", "Joao")
+    blessing.addBlessing("nivel", "iniciante")
+    return blessing
+
+def analisar_fluxo(blessing: BlessingState) -> BlessingState:
+    nome = blessing.getBlessing("usuario")
+    nivel = blessing.getBlessing("nivel")
+    blessing.addBlessing("mensagem", f"Usuário {nome} está no nível {nivel}")
+    return blessing</code></pre>
+        </div>
+    </div>
+
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-report-analytics me-2"></i> Resultado da Blessing
+    </h2>
+
+    <p>Depois da execução, a sua <code>Blessing</code> estará assim:</p>
+
+    <div class="card bg-light border border-success mb-4">
+        <div class="card-body">
+            <pre class="mb-0"><code>{
+  "usuario": "Joao",
+  "nivel": "iniciante",
+  "mensagem": "Usuário Joao está no nível iniciante"
+}</code></pre>
+        </div>
+    </div>
+
+    <h2 class="mt-5">
+        <i class="icon-base ti tabler-database me-2"></i> Por que isso importa?
+    </h2>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">✅ Você elimina variáveis espalhadas — tudo está centralizado</li>
+        <li class="list-group-item">✅ Pode acessar qualquer dado de qualquer ponto do fluxo</li>
+        <li class="list-group-item">✅ Facilita logs, auditoria e até depuração</li>
+        <li class="list-group-item">✅ Funciona como "memória viva" do seu fluxo</li>
+    </ul>
+
+    <div class="alert alert-primary fs-5">
+        <strong>Blessing</strong> não é só uma estrutura técnica.
+        É uma maneira nova de pensar: <em>cada etapa do seu código pode abençoar a próxima com mais inteligência, mais contexto, mais valor.</em>
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="/jesusgraph/blessing-metodos" class="btn btn-lg btn-success">
+            Ver métodos da Blessing →
+        </a>
+    </div>
+</div>
